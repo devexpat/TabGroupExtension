@@ -1,9 +1,11 @@
 // when delete button clicked removes the group number
 // from google sync and from the popup page of extension
-deleteButton.addEventListener('click', async () => {
+window.deleteButton.addEventListener('click', async () => {
+  const isCheckedArray = document.querySelectorAll('.container input:checked');
+
   //use method isChecked to loop through checkboxes and see if checked or not 
   // if checked displays conirmation message, if nothing checked displays erro rmessage
-  if(isChecked(isCheckedArray)) {
+  if(isCheckedArray.length) {
     ModalWindow.openModal({
       title: "Do you want to delete?",
       content: "This will permanently delete selected rules",
@@ -18,35 +20,16 @@ deleteButton.addEventListener('click', async () => {
   }
 });
 
-gobackButton.addEventListener('click', async () => {
-  const isCheckedArray = document.querySelectorAll('.container input');
-  const dropDownBox = document.querySelectorAll('.dropdown');
+window.addButton.addEventListener('click', async () => {
+  addGroup(); 
+});
+
+window.gobackButton.addEventListener('click', async () => {
   // deleteButtonLogic(isCheckedArray, tabGroupsArray, dropDownBox, true)
-  goBackButtonLogic(isCheckedArray, dropDownBox)
+  goBackButtonLogic()
 })
-editAddButton.addEventListener('click', async function ()  {
-  const isCheckedArray = document.querySelectorAll('.container input');
-  const inputBox = document.querySelectorAll('.container');
-  const checkedNameField = document.querySelectorAll('.name');
-  const checkedUrlField = document.querySelectorAll('.flex-center');
-  const dropDownBox = document.querySelectorAll('.dropdown');
-  const boxField = document.querySelectorAll('.box');
-  // if save button clicked  because should be only
-  // Save Button text when delete button is not visible
-  if (window.getComputedStyle(deleteButton, null).display === 'none') {
-    saveButtonLogic(this, inputBox, isCheckedArray, checkedNameField, checkedUrlField, boxField, dropDownBox);
-  } 
-  else {
-    if(isChecked(isCheckedArray)) {
-      editButtonLogic(this, isCheckedArray, checkedNameField, checkedUrlField, dropDownBox);
-    }
-    else {
-      ModalWindow.openModal({
-      title:'No Group Checked!',
-      content: 'Please check tab group to edit/add a rule!'
-    })
-    }
-  }
+window.editAddButton.addEventListener('click', async function ()  {
+  editGroup()
 });
 
 zoomLg.addEventListener('click', async() => {
