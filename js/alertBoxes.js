@@ -9,7 +9,9 @@ const ModalWindow = {
             }
             // if confirm button is clicked instead use delet ebutton logic  with argument isCheckedArray and tabGroups array as arguments
             else if (e.target.classList.contains("modal__confirm__button")) {
-              deleteButtonLogic(isCheckedArray, tabGroupsArray);
+              const isCheckedArray = document.querySelectorAll('.container input');
+
+              deleteButtonLogic(isCheckedArray);
               this.closeModal()
 
             }

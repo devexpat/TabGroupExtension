@@ -1,3 +1,4 @@
+const tabGroupPrefix=`GROUP`;
 // make chormestorage get a promise instead of callback avoid callback hell muahhahahah
 function chromeStorageGet(result) {
   return new Promise((resolve, reject) => {
@@ -53,8 +54,13 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
             let ungroup = true;
             let matchingTabGroupInBrowser = false;
             for (let i = 0; i < chromeStorageTabGroupObject.TABGROUPS.length; i += 1) {
-              const group = `GROUP${String(i + 1)}`;
+              const group = tabGroupPrefix+`${String(i + 1)}`;
               const currentChromeStorageTabGroup = chromeStorageTabGroupObject.TABGROUPS[i];
+              
+              if(currentChromeStorageTabGroup==null)
+              continue;
+             
+             
               if ( Object.prototype.hasOwnProperty.call(currentChromeStorageTabGroup, group) ) {
                 const searchTerms = currentChromeStorageTabGroup[group].URL;
                 if (isSearchTermInUrl(url, searchTerms)) {
